@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Smart Mirror
+Exec=python /home/pi/Smart-Mirror/smartmirror.py
+Path=/home/pi/Smart-Mirror
+Type=application

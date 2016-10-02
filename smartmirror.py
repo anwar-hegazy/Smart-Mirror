@@ -10,9 +10,8 @@ import traceback
 import feedparser
 from PIL import Image, ImageTk
 
-ip = '<IP>'
 country_code = 'us'
-weather_api_token = '<TOKEN>'
+weather_api_token = 'f46764611cab57fc6228e8ee09d267da'
 
 
 # maps open weather icons to
@@ -277,6 +276,7 @@ class FullscreenWindow:
         # calender - removing for now
         # self.calender = Calendar(self.bottomFrame)
         # self.calender.pack(side = RIGHT, anchor=S, padx=100, pady=60)
+	self.tk.attributes("-fullscreen", True)
 
     def toggle_fullscreen(self, event=None):
         self.state = not self.state  # Just toggling the boolean
