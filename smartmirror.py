@@ -2,6 +2,11 @@
 # requirements
 # requests, feedparser, traceback, Pillow
 
+# 10-02-16 JMM - Removed IP variable as it was no longer being used.
+# 10-02-16 JMM - Modified to startup in full screen mode from the start
+# 10-02-16 JMM - Fixed the country_code so it was actually being used in selecting news
+# 10-02-16 JMM - Country Code is now determined automatically based on IP location
+
 from Tkinter import *
 import time
 import requests
@@ -10,8 +15,9 @@ import traceback
 import feedparser
 from PIL import Image, ImageTk
 
-country_code = 'us'
-weather_api_token = 'f46764611cab57fc6228e8ee09d267da'
+# Do not enter country_code, it is now determined based upon IP location - JMM
+country_code = ''
+weather_api_token = 'API KEY FROM DARKSKY.NET'
 
 
 # maps open weather icons to
@@ -102,6 +108,7 @@ class Weather(Frame):
             return "Error: %s. Cannot get ip." % e
 
     def get_weather(self):
+        global country_code
         try:
             # get location
             location_req_url = "http://freegeoip.net/json/%s" % self.get_ip()
@@ -110,6 +117,7 @@ class Weather(Frame):
 
             lat = location_obj['latitude']
             lon = location_obj['longitude']
+            country_code = location_obj['country_code']
 
             location2 = "%s, %s" % (location_obj['city'], location_obj['region_code'])
 
@@ -182,6 +190,7 @@ class News(Frame):
         self.get_headlines()
 
     def get_headlines(self):
+        global country_code
         try:
             # remove all children
             for widget in self.headlinesContainer.winfo_children():
@@ -261,7 +270,7 @@ class FullscreenWindow:
         self.bottomFrame = Frame(self.tk, background = 'black')
         self.topFrame.pack(side = TOP, fill=BOTH, expand = YES)
         self.bottomFrame.pack(side = BOTTOM, fill=BOTH, expand = YES)
-        self.state = False
+        self.state = True
         self.tk.bind("<Return>", self.toggle_fullscreen)
         self.tk.bind("<Escape>", self.end_fullscreen)
         # clock
