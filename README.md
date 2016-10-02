@@ -84,3 +84,18 @@ Go to the bottom of the file and add this line:
 display_rotate=1
 ```
 You will need to reboot for this change to take effect.
+
+## Turning off the Screen Saver
+More than likely you are going to want to disable the screen saver that is on my default on the Raspberry Pi.  It is not obvious how to do that in the GUI.  Below are 3 lines you can copy and paste into /etc/xdg/lxsession/LXDE/autostar
+
+Open the file for editing:
+```
+sudo vi /etc/xdg/lxsession/LXDE/autostart
+```
+
+Copy and paste to the bottom after the last line.
+```
+@xset s noblank 
+@xset s off 
+@xset -dpms
+```
