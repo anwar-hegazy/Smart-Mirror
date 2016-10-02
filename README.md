@@ -99,3 +99,26 @@ Copy and paste to the bottom after the last line.
 @xset s off 
 @xset -dpms
 ```
+
+## Turning off the Screen Blanking feature
+You also need to turn off the screen blanking feature.  There are 2 variable that need to be modified in /etc/kbd/config
+
+```
+sudo vi /etc/kbd/config
+```
+
+Search for:
+
+```
+BLANK_TIME
+POWERDOWN_TIME
+```
+
+Change each of them to 0.  They should look like this:
+
+```
+BLANK_TIME=0
+POWERDOWN_TIME=0
+```
+
+This will not take affect until after the next reboot.
